@@ -4,6 +4,8 @@ import HomeView from "../views/HomeView.vue"
 import CompanyListView from "../views/CompanyListView.vue"
 import CompanyDetail from "../components/CompanyDetail.vue"
 import PersonListView from "../views/PersonListView.vue"
+import PersonCreateView from "../views/PersonCreateView.vue"
+import CompanyCreateView from "../views/CompanyCreateView.vue"
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,9 +21,9 @@ const router = createRouter({
         component: PersonListView,
         },
         {
-        path: '/person/:id/create',
+        path: '/person/create',
         name: 'person.create',
-        component: HomeView,
+        component: PersonCreateView,
         },
         {
         path: '/person/:id/detail',
@@ -39,6 +41,11 @@ const router = createRouter({
         name: 'company.detail',
         component: CompanyDetail,
         props: true,
+        },
+        {
+        path: '/company/create',
+        name: 'company.create',
+        component: CompanyCreateView,
         },
     ]
 });

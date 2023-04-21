@@ -59,24 +59,4 @@ export default {
 
 
 
-
-// import { onMounted, ref } from "vue";
-// import axios from "axios";
-
-// const getPersons = async () => {
-//     const result = await axios.get(``)
-// }
-
-// let personsList = ref([]);
-// const getPersons = async () => {
-//         const result = await axios.get(`${import.meta.env.VITE_API_BASE_URL}${import.meta.env.VITE_API_URL}`);
-//         const personsData = await Promise.all(result);
-        
-//         personsData.forEach((value, index) => {
-//             personsList.value[index] = value.data;
-//         });
-//     }
-// await getPersons();
-
-
 </script>

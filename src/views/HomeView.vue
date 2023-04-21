@@ -15,7 +15,6 @@
 
 
 <script setup>
-import PersonIndex from '../components/PersonIndex.vue';
 
 
 </script>

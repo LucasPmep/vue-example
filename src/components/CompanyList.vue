@@ -1,6 +1,9 @@
 <template>
     <h1>This is the PersonIndex component.</h1>
     <div class="flex flex-col">
+        <div class="flex">
+            <router-link :to="{ name: 'company.create' }" class="bg-green-500 px-2 py-1 text-white rounded">Create company</router-link>
+        </div>
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
             <div class="overflow-hidden">

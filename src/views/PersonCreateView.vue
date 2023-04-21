@@ -1,10 +1,10 @@
 <template>
     <main class="container text-white pt-4">
       <div class="flex flex-col gap-4">
-          Here is the person list view, which calls to other components to display. 
+          Here is the classic home view, which calls to other components to display. 
           
           <Suspense>
-            <PersonList />
+            <PersonCreate />
             <template #fallback>
               <p>Loading...</p>
             </template>
@@ -15,7 +15,7 @@
 
 
 <script setup>
-import PersonList from '../components/PersonList.vue';
+import PersonCreate from '../components/PersonCreate.vue';
 
 
 </script>
