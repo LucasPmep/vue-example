@@ -4,7 +4,7 @@
           Here is the classic home view, which calls to other components to display. 
           
           <Suspense>
-            <h1>DASHBOARD</h1>
+            <PersonIndex />
             <template #fallback>
               <p>Loading...</p>
             </template>
