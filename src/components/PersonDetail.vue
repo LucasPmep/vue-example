@@ -1,61 +1,89 @@
 <template>
-    <h1>This is the PersonIndex component.</h1>
-    <div class="flex flex-col">
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-            <div class="overflow-hidden">
-                <table class="min-w-full text-left text-sm font-light"  v-if="persons[0]">
-                    <thead class="border-b font-medium dark:border-neutral-500">
-                        <tr>
-                        <th scope="col" class="px-6 py-4">#</th>
-                        <th scope="col" class="px-6 py-4">Firstname</th>
-                        <th scope="col" class="px-6 py-4">Lastname</th>
-                        <th scope="col" class="px-6 py-4">Civility</th>
-                        <th scope="col" class="px-6 py-4">Email</th>
-                        <th scope="col" class="px-6 py-4">Phone</th>
-                        <th scope="col" class="px-6 py-4">Company</th>
-                        <th scope="col" class="px-6 py-4">Departements</th>  
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="person in persons" :key="person.id"
-                        class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 hover:bg-opacity-10 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.id }}</router-link></th>
-                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.firstname }}</router-link></td>
-                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.lastname }}</router-link></td>
-                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.civility.name }}</router-link></td>
-                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.email }}</router-link></td>
-                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.phone }}</router-link></td>
-                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.company.name }}</router-link></td>
-                            <td class="whitespace-nowrap px-6 py-4"><div v-for="departement in person.departements"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ departement.name }}</router-link></div></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div v-else>
-                    <p>There is currently no people in here ! (maybe turn on the server...)</p>
-                </div>
-            </div>
-            </div>
+    <h1>This is the person-detail component.</h1>
+    <div v-if="errors !== ''">
+    {{ errors }}
+    </div>
+    <form class="space-y-6 pb-4" @submit.prevent="savePerson">
+        <div>
+            <label for="firstname" class="block">Firstname</label>
+            <input type="text" id="name" v-model="person.firstname" class="text-black">
         </div>
-    </div>  
+        <div>
+            <label for="lastname" class="block">Lastname</label>
+            <input type="text" id="lastname" v-model="person.lastname" class="text-black">
+        </div>
+        <div>
+            <label for="email" class="block">Email</label>
+            <input type="text" id="email" v-model="person.email" class="text-black">
+        </div>
+        <div>
+            <label for="phone" class="block">Phone</label>
+            <input type="text" id="phone" v-model="person.phone" class="text-black">
+        </div>
+        <div>
+            <label for="civility" class="block">Civility</label>
+            <select id="civility" class="text-black" v-model="person.civility">
+                <option value="homme">Homme</option>
+                <option value="femme">Femme</option>
+                <option value="autre">Autre</option>
+            </select>
+        </div>
+        <!-- <div>
+            <label for="company" class="block">Company</label>
+            <select id="civility" class="text-black" v-model="person.company">
+                <option value="company.name"  v-for="company in companies" :key="company.id">{{ company.name }}</option>
+            </select> -->
+            <!-- <input type="text" id="phone" v-model="person.phone" class="text-black"> -->
+        <!-- </div>
+        <div>        
+            <label for="departements" class="block">Departements</label>
+            <select v-model="person.departement" id="departements" class="block mt-1 w-full text-black" multiple>
+                <option v-for="departement in departements" :value="departement.id">{{ departement.name }}</option>
+            </select>
+            Vos departements liés : <div v-for="departement in person.departements">{{ departement }}</div> -->
+            <!-- <select id="departements" class="text-black" multiple v-model="person.departements">
+                <option value="departement.name"  v-for="departement in departements" :key="departement.id">{{ departement.name }}</option>
+            </select> -->
+        <!-- </div> -->
+        <button type="submit" class="bg-blue-500 px-2 py61 text-white rounded">Modify</button>
+        <button type="submit" class="bg-red-500 px-2 py61 text-white rounded">Delete</button>
+    </form>
 </template>
 
-<!-- here is where we would want to get link to API -->
-<script>
 
+<script setup>
+
+import { reactive } from "vue";
 import usePersons from "../services/personservices.js";
+import useCompanies from "../services/companyservices.js";
+import useDepartements from "../services/departementservices.js";
 import { onMounted } from "vue";
-import { RouterLink } from 'vue-router';
 
-export default {
-    setup() {
-        const { persons, getPersons } = usePersons();
-        onMounted(getPersons);
-        return {
-            persons
-        };
+const props = defineProps({
+    id: {
+        required: true,
+        type: String, 
     }
-}
+});
+
+// On va chercher les entreprises
+const { companies, getCompanies } = useCompanies();
+onMounted(getCompanies);
+// On va chercher les départements
+const { departements, getDepartements } = useDepartements();
+onMounted(getDepartements);
+// On va chercher la personne concernée
+const { getPerson, updatePerson, errors, person } = usePersons();
+onMounted( async () => {
+    await getPerson(props.id)
+});
+
+
+
+
+const savePerson = async () => {
+    await updatePerson(props.id);
+};
 
 
 

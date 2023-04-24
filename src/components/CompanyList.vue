@@ -1,5 +1,5 @@
 <template>
-    <h1>This is the PersonIndex component.</h1>
+    <h1>This is the Company-list component.</h1>
     <div class="flex flex-col">
         <div class="flex">
             <router-link :to="{ name: 'company.create' }" class="bg-green-500 px-2 py-1 text-white rounded">Create company</router-link>
@@ -42,20 +42,29 @@
 </template>
 
 <!-- here is where we would want to get link to API -->
-<script>
+<script setup>
+
+// OLD WAY
+// 
+// import useCompanies from "../services/companyservices.js";
+// import { onMounted } from "vue";
+// import { RouterLink } from 'vue-router';
+
+// export default {
+//     setup() {
+//         const { companies, getCompanies } = useCompanies();
+//         onMounted(getCompanies);
+//         return {
+//             companies
+//         };
+//     }
+// }
 
 import useCompanies from "../services/companyservices.js";
 import { onMounted } from "vue";
 import { RouterLink } from 'vue-router';
 
-export default {
-    setup() {
-        const { companies, getCompanies } = useCompanies();
+const { companies, getCompanies } = useCompanies();
         onMounted(getCompanies);
-        return {
-            companies
-        };
-    }
-}
 
 </script>

@@ -1,7 +1,7 @@
 <template>
     <main class="container text-white pt-4">
       <div class="flex flex-col gap-4">
-          Here is the new company view, which calls to other components to display. 
+          Here is the new company-list view, which calls to other components to display. 
           
           <Suspense>
             <CompanyList />

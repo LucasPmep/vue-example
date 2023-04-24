@@ -14,7 +14,7 @@ export default function useCompanies() {
     const createCompany = async (data) => {
         errors.value = '';
         try {
-            await axios.post('http://localhost/api/companies', data);
+            await axios.post('http://localhost:8000/api/companies', data, );
             await router.push({name: 'company.list'});
         } catch(error) {
             const createCompanyErrors = error.response.data.errors;

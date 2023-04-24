@@ -25,33 +25,52 @@
 </template>
 
 <!-- here is where we would want to get link to API -->
-<script>
+<script setup>
+
+
+// OLD WAY
+// 
+// import { reactive } from "vue";
+// import useCompanies from "../services/companyservices.js";
+
+// export default {
+//     setup() {
+//         const form = reactive({
+//             name: '',
+//             postalcode: '',
+//             city: '',
+//             CA: '',
+//         });
+
+//         const { createCompany, errors } = useCompanies();
+
+//         const storeCompany = async () => {
+//             await createCompany({...form});
+//         };
+ 
+//         return {
+//             form,
+//             errors,
+//             storeCompany
+//         };
+//     }
+// }
+
 import { reactive } from "vue";
 import useCompanies from "../services/companyservices.js";
 
-export default {
-    setup() {
-        const form = reactive({
-            name: '',
-            postalcode: '',
-            city: '',
-            CA: '',
-        });
+const form = reactive({
+    name: '',
+    postalcode: '',
+    city: '',
+    CA: '',
+});
 
-        const { createCompany, errors } = useCompanies();
+const { createCompany, errors } = useCompanies();
 
-        const storeCompany = async () => {
-            await createCompany({...form});
-        };
- 
-        return {
-            form,
-            errors,
-            storeCompany
-        };
-    }
-}
-
+const storeCompany = async () => {
+    await createCompany({...form});
+};
 
 
 </script>

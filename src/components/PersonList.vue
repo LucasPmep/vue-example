@@ -1,5 +1,5 @@
 <template>
-    <h1>This is the PersonList component.</h1>
+    <h1>This is the person-list component.</h1>
     <div class="flex flex-col">
         <div class="flex">
             <router-link :to="{ name: 'person.create' }" class="bg-green-500 px-2 py-1 text-white rounded">Create person</router-link>
@@ -44,23 +44,14 @@
 </template>
 
 <!-- here is where we would want to get link to API -->
-<script>
+<script setup>
 
 import usePersons from "../services/personservices.js";
 import { onMounted } from "vue";
 import { RouterLink } from 'vue-router';
 
-export default {
-    setup() {
-        const { persons, getPersons } = usePersons();
-        onMounted(getPersons);
-        return {
-            persons
-        };
-    }
-}
-
-
+const { persons, getPersons } = usePersons();
+onMounted(getPersons);
 
 
 // import { onMounted, ref } from "vue";
