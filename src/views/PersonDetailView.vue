@@ -4,7 +4,7 @@
           Here is the detail-person view, which calls to other components to display. 
           
           <Suspense>
-            <PersonDetail />
+            <PersonDetail :id="id"/>
             <template #fallback>
               <p>Loading...</p>
             </template>
@@ -16,6 +16,11 @@
 
 <script setup>
 import PersonDetail from '../components/PersonDetail.vue';
-
+const props = defineProps({
+    id: {
+        required: true,
+        type: String, 
+    }
+});
 
 </script>

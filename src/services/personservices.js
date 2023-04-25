@@ -35,9 +35,11 @@ export default function usePersons() {
     const updatePerson = async (id) => {
         errors.value = '';
         try {
+            console.log(person.value);
             await axios.put(`http://localhost:8000/api/persons/` + id, person.value);
             await router.push({name: 'person.list'});
         } catch(error) {
+            console.error(error);
             const createPersonErrors = error.response.data.errors;
 
             for (const key in createPersonErrors) {
