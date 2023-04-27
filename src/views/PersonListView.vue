@@ -4,7 +4,7 @@
           Here is the person-list view, which calls to other components to display. 
           
           <Suspense>
-            <PersonList />
+            <AsyncComponent />
             <template #fallback>
               <p>Loading...</p>
             </template>
@@ -15,7 +15,5 @@
 
 
 <script setup>
-import PersonList from '../components/PersonList.vue';
-
-
+import AsyncComponent from "../components/PersonList.vue";
 </script>

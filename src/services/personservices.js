@@ -48,6 +48,21 @@ export default function usePersons() {
         }
     };
 
+    const deletePerson = async (id) => {
+        errors.value = '';
+        try {
+            await axios.delete(`http://localhost:8000/api/persons/` + id, person.value);
+            await router.push({name: 'person.list'});
+        } catch (error) {
+            console.error(error);
+            const createPersonErrors = error.response.data.errors;
+
+            for (const key in createPersonErrors) {
+                errors.value += createPersonErrors[key][0] + ' ';
+            }
+        }
+    }
+
     return {
         person,
         persons,
@@ -55,6 +70,7 @@ export default function usePersons() {
         getPersons,
         getPerson,
         createPerson,
-        updatePerson
+        updatePerson,
+        deletePerson
     }
 };

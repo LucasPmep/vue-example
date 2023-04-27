@@ -13,12 +13,11 @@
             <input type="text" id="lastname" v-model="form.lastname" class="text-black">
         </div>
         <div>
-            <label for="email" class="block">Email</label>
-            <input type="text" id="email" v-model="form.email" class="text-black">
-        </div>
-        <div>
-            <label for="phone" class="block">Phone</label>
-            <input type="text" id="phone" v-model="form.phone" class="text-black">
+            <label for="civility" class="block">Civility</label>
+            <select id="civility" v-model="form.civility_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <!-- Option -->
+                <option v-for="civility in civilities" :value="civility.id">{{ civility.name }}</option>
+            </select>
         </div>
         <button type="submit" class="bg-blue-500 px-2 py61 text-white rounded">Create</button>
     </form>
@@ -27,45 +26,20 @@
 <!-- here is where we would want to get link to API -->
 <script setup>
 
-// OLD WAY
-// 
-// import { reactive } from "vue";
-// import usePersons from "../services/personservices.js";
-
-// export default {
-//     setup() {
-//         const form = reactive({
-//             firstname: '',
-//             lastname: '',
-//             email: '',
-//             phone: '',
-//         });
-
-//         const { createPerson, errors } = usePersons();
-
-//         const storePerson = async () => {
-//             await createPerson({...form});
-//         };
- 
-//         return {
-//             form,
-//             errors,
-//             storePerson
-//         };
-//     }
-// }
-
 import { reactive } from "vue";
 import usePersons from "../services/personservices.js";
+import useCivilities from "../services/civilityservices";
 
 const form = reactive({
     firstname: '',
     lastname: '',
-    email: '',
-    phone: '',
+    civility_id: ''
 });
 
 const { createPerson, errors } = usePersons();
+const { civilities, getCivilities } = useCivilities();
+
+await getCivilities();
 
 const storePerson = async () => {
     await createPerson({...form});

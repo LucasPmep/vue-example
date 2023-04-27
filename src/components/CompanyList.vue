@@ -43,28 +43,10 @@
 
 <!-- here is where we would want to get link to API -->
 <script setup>
-
-// OLD WAY
-// 
-// import useCompanies from "../services/companyservices.js";
-// import { onMounted } from "vue";
-// import { RouterLink } from 'vue-router';
-
-// export default {
-//     setup() {
-//         const { companies, getCompanies } = useCompanies();
-//         onMounted(getCompanies);
-//         return {
-//             companies
-//         };
-//     }
-// }
-
 import useCompanies from "../services/companyservices.js";
-import { onMounted } from "vue";
 import { RouterLink } from 'vue-router';
 
 const { companies, getCompanies } = useCompanies();
-        onMounted(getCompanies);
+await getCompanies()
 
 </script>
