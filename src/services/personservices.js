@@ -24,11 +24,7 @@ export default function usePersons() {
             await axios.post(`http://localhost:8000/api/persons`, data);
             await router.push({name: 'person.list'});
         } catch(error) {
-            const createPersonErrors = error.response.data.errors;
-
-            for (const key in createPersonErrors) {
-                errors.value += createPersonErrors[key][0] + ' ';
-            }
+            errors.value = error.response.data.errors;
         }
     };
 
@@ -39,12 +35,7 @@ export default function usePersons() {
             await axios.put(`http://localhost:8000/api/persons/` + id, person.value);
             await router.push({name: 'person.list'});
         } catch(error) {
-            console.error(error);
-            const createPersonErrors = error.response.data.errors;
-
-            for (const key in createPersonErrors) {
-                errors.value += createPersonErrors[key][0] + ' ';
-            }
+            errors.value = error.response.data.errors;
         }
     };
 
@@ -54,12 +45,7 @@ export default function usePersons() {
             await axios.delete(`http://localhost:8000/api/persons/` + id, person.value);
             await router.push({name: 'person.list'});
         } catch (error) {
-            console.error(error);
-            const createPersonErrors = error.response.data.errors;
-
-            for (const key in createPersonErrors) {
-                errors.value += createPersonErrors[key][0] + ' ';
-            }
+            errors.value = error.response.data.errors;
         }
     }
 

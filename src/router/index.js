@@ -2,7 +2,7 @@ import {createRouter, createWebHistory } from "vue-router"
 import PersonDetailView from "../views/PersonDetailView.vue"
 import HomeView from "../views/HomeView.vue"
 import CompanyListView from "../views/CompanyListView.vue"
-import CompanyDetail from "../components/CompanyDetail.vue"
+import CompanyDetailView from "../views/CompanyDetailView.vue"
 import PersonListView from "../views/PersonListView.vue"
 import PersonCreateView from "../views/PersonCreateView.vue"
 import CompanyCreateView from "../views/CompanyCreateView.vue"
@@ -39,7 +39,7 @@ const router = createRouter({
         {
         path: '/company/:id/detail',
         name: 'company.detail',
-        component: CompanyDetail,
+        component: CompanyDetailView,
         props: true,
         },
         {

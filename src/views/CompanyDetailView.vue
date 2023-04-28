@@ -1,7 +1,7 @@
 <template>
     <main class="container text-white pt-4">
       <div class="flex flex-col gap-4 ml-auto mr-auto">
-          Here is the detail-person view, which calls to other components to display. 
+          Here is the detail-company view, which calls to other components to display. 
           
           <Suspense>
             <template #default>
@@ -17,8 +17,6 @@
 
 
 <script setup>
-// import { defineAsyncComponent } from "vue";
-
 const props = defineProps({
     id: {
         required: true,
@@ -26,17 +24,6 @@ const props = defineProps({
     }
 });
 
-import AsyncComponent from "../components/PersonDetail.vue";
-
-// const AsyncComponent = defineAsyncComponent(() => {
-//   import('../components/PersonDetail.vue')
-// })
-
-// const AsyncComponent = defineAsyncComponent({
-//   loader: () => import ('../components/PersonDetail.vue'),
-//   loadingComponent: 'LOADING...',
-//   suspensible: true
-// })
-
+import AsyncComponent from "../components/CompanyDetail.vue";
 
 </script>

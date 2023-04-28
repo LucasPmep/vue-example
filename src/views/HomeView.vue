@@ -1,6 +1,6 @@
 <template>
     <main class="container text-white pt-4">
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 ml-auto mr-auto">
           <div class="m-6 leading-none text-9xl font-extrabold text-center">
             Dashboard
           </div>

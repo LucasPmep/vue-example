@@ -10,25 +10,25 @@
                 <table class="min-w-full text-left text-sm font-light"  v-if="companies[0]">
                     <thead class="border-b font-medium dark:border-neutral-500">
                         <tr>
-                        <th scope="col" class="px-6 py-4">#</th>
+                        <!-- <th scope="col" class="px-6 py-4">#</th> -->
                         <th scope="col" class="px-6 py-4">Name</th>
                         <th scope="col" class="px-6 py-4">Postal code</th>
-                        <th scope="col" class="px-6 py-4">City</th>
+                        <!-- <th scope="col" class="px-6 py-4">City</th> -->
                         <th scope="col" class="px-6 py-4">CA</th>
-                        <th scope="col" class="px-6 py-4">People</th>
-                        <th scope="col" class="px-6 py-4">Activity sectors</th>
+                        <!-- <th scope="col" class="px-6 py-4">People</th> -->
+                        <!-- <th scope="col" class="px-6 py-4">Activity sectors</th> -->
                     </tr>
                     </thead>
                     <tbody>
                         <tr v-for="company in companies" :key="company.id"
                         class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 hover:bg-opacity-10 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium"><router-link :to="{ name: 'company.detail', params: { id: company.id }}">{{ company.id }}</router-link></th>
-                            <td class="whitespace-nowrap px-6 py-4">{{ company.name }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ company.postalcode }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ company.city }}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ company.CA }}</td>
-                            <td class="whitespace-nowrap px-6 py-4"><div v-for="person in company.people"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.firstname }} {{ person.lastname }}</router-link></div></td>
-                            <td class="whitespace-nowrap px-6 py-4"><div v-for="activitysector in company.activitysectors">{{ activitysector.name }}</div></td>
+                            <!-- <th class="whitespace-nowrap px-6 py-4 font-medium"><router-link :to="{ name: 'company.detail', params: { id: company.id }}">{{ company.id }}</router-link></th> -->
+                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'company.detail', params: { id: company.id }}">{{ company.name }}</router-link></td>
+                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'company.detail', params: { id: company.id }}">{{ company.postalcode }}</router-link></td>
+                            <!-- <td class="whitespace-nowrap px-6 py-4">{{ company.city }}</td> -->
+                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'company.detail', params: { id: company.id }}">{{ company.CA }}</router-link></td>
+                            <!-- <td class="whitespace-nowrap px-6 py-4"><div v-for="person in company.people"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.firstname }} {{ person.lastname }}</router-link></div></td> -->
+                            <!-- <td class="whitespace-nowrap px-6 py-4"><div v-for="activitysector in company.activitysectors">{{ activitysector.name }}</div></td> -->
                         </tr>
                     </tbody>
                 </table>

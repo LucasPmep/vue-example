@@ -1,16 +1,19 @@
 <template>
     <h1>This is the PersonCreate component.</h1>
-    <div v-if="errors !== ''">
-    {{ errors }}
-    </div>
     <form class="space-y-6" @submit.prevent="storePerson">
         <div>
             <label for="firstname" class="block">Firstname</label>
             <input type="text" id="name" v-model="form.firstname" class="text-black">
+            <div v-if="errors.firstname">
+                <ul><li v-for="error in errors.firstname" class="text-red-600 font-bold text-l">{{ error }} </li></ul>
+            </div>
         </div>
         <div>
             <label for="lastname" class="block">Lastname</label>
             <input type="text" id="lastname" v-model="form.lastname" class="text-black">
+            <div v-if="errors.lastname">
+                <ul><li v-for="error in errors.lastname" class="text-red-600 font-bold text-l">{{ error }} </li></ul>
+            </div>
         </div>
         <div>
             <label for="civility" class="block">Civility</label>
@@ -18,6 +21,9 @@
                 <!-- Option -->
                 <option v-for="civility in civilities" :value="civility.id">{{ civility.name }}</option>
             </select>
+            <div v-if="errors.civility_id">
+                <ul><li v-for="error in errors.civility_id" class="text-red-600 font-bold text-l">{{ error }} </li></ul>
+            </div>
         </div>
         <button type="submit" class="bg-blue-500 px-2 py61 text-white rounded">Create</button>
     </form>
