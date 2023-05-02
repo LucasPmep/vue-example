@@ -33,13 +33,7 @@
         
         <div>
             <label for="civility" class="block">Civility*</label>
-            <select v-if="person.civility" id="civility" v-model="person.civility.id" @change="modifyLocalGenre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <!-- Option -->
-                <option v-for="civility in civilities" :value="civility.id">{{ civility.name }}</option>
-            </select>
-            <select v-else                 id="civility"                              @change="modifyLocalGenre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <!-- Option -->
-                <option value=""> </option>
+            <select id="civility" v-model="person.civility_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option v-for="civility in civilities" :value="civility.id">{{ civility.name }}</option>
             </select>
             <div v-if="errors.civility_id">
@@ -51,11 +45,7 @@
 
         <div>
             <label for="company" class="block">Company</label>
-            <select v-if="person.company" id="company" v-model="person.company.id" @change="modifyLocalCompany" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option value=""> </option>
-                <option :value="company.id" v-for="company in companies">{{ company.name }}</option>
-            </select>
-            <select v-else                id="company"                             @change="modifyLocalCompany" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <select id="company" v-model="person.company_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value=""> </option>
                 <option :value="company.id" v-for="company in companies">{{ company.name }}</option>
             </select>
@@ -103,23 +93,18 @@ const { getPerson, updatePerson, errors, person, deletePerson } = usePersons();
 const { getCivilities, civilities } = useCivilities();
 let reformatedIds = reactive([]);
 
+
 await getPerson(props.id);
 reformatedIds = person.value.departements.map(({ id }) => id);
+console.log(person)
 await getCivilities();
 await getCompanies();
 await getDepartements();
 
 
-const modifyLocalGenre = () => {
-    person.value.civility_id = civility.value;
-    // person.value.civility_id = person.value.civility.id;
-}
-const modifyLocalCompany = () => {
-    console.log(company.value); // value du champ choisi par l'utilisateur
-    person.value.company_id = company.value;
-    // person.value.company_id = person.value.company.id;
-}
+
 const modifyLocalDepIds = async () => {
+    // console.log(reformatedIds)
     person.value.departements = reformatedIds;
 }
 

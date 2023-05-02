@@ -11,7 +11,7 @@
 
         <div>        
             <label for="activitysectors" class="block">Activity sectors</label>
-            <select v-if="reformatedSectorsIds" v-model="reformatedSectorsIds" id="activitysectors" multiple size="10" @change="modifyLocalSectorsIds"
+            <select v-model="reformatedSectorsIds" id="activitysectors" multiple size="10" @change="modifyLocalSectorsIds"
             class="bg-gray-50 border border-gray-300 shadow text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option v-for="activitysector in activitysectors" :value="activitysector.id">{{ activitysector.name }}</option>
             </select>
@@ -45,7 +45,7 @@
 
         <div>        
             <label for="persons" class="block">People</label>
-            <select v-if="reformatedIds" v-model="reformatedIds" id="people" multiple size="10" @change="modifyLocalPeopleIds"
+            <select v-model="reformatedIds" id="people" multiple size="10" @change="modifyLocalPeopleIds"
             class="bg-gray-50 border border-gray-300 shadow text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option v-for="person in persons" :value="person.id">{{ person.lastname }} {{ person.firstname }}</option>
             </select>
@@ -57,7 +57,6 @@
         <button type="submit" class="bg-blue-500 px-2 py61 text-white roundedp m-4 shadow">Modify</button>
         <button type="button" class="bg-red-500 px-2 py61 text-white rounded m-4 shadow" @click="removeCompany">Delete</button>
     </form>
-    <!-- <div v-else><p>Loading...</p></div> -->
 </template>
 
 

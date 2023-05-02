@@ -10,28 +10,21 @@
                 <h1>There is currently {{ personCount }} persons.</h1>
                 <table class="min-w-full text-left text-sm font-light"  v-if="persons[0]">
                     <thead class="border-b font-medium dark:border-neutral-500">
-                        <tr>
-                        <!-- <th scope="col" class="px-6 py-4">#</th> -->
                         <th scope="col" class="px-6 py-4">Firstname</th>
                         <th scope="col" class="px-6 py-4">Lastname</th>
                         <th scope="col" class="px-6 py-4">Civility</th>
-                        <!-- <th scope="col" class="px-6 py-4">Email</th>
-                        <th scope="col" class="px-6 py-4">Phone</th>
-                        <th scope="col" class="px-6 py-4">Company</th>
-                        <th scope="col" class="px-6 py-4">Departements</th>   -->
-                    </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="person in persons" :key="person.id"
-                        class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 hover:bg-opacity-10 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                            <!-- <th class="whitespace-nowrap px-6 py-4 font-medium"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.id }}</router-link></th> -->
-                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.firstname }}</router-link></td>
-                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.lastname }}</router-link></td>
-                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}" v-if="person.civility!== null">{{ person.civility.name }}</router-link></td>
-                            <!-- <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.email }}</router-link></td>
-                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ person.phone }}</router-link></td>
-                            <td class="whitespace-nowrap px-6 py-4"><router-link :to="{ name: 'person.detail', params: { id: person.id }}" v-if="person.company !== null">{{ person.company.name }}</router-link></td>
-                            <td class="whitespace-nowrap px-6 py-4"><div v-for="departement in person.departements"><router-link :to="{ name: 'person.detail', params: { id: person.id }}">{{ departement.name }}</router-link></div></td> -->
+                        <tr v-for="person in persons" @click="redirectToPerson(person)" class="w-full border-b transition duration-300 ease-in-out hover:bg-neutral-100 hover:bg-opacity-10 dark:border-neutral-500 dark:hover:bg-neutral-600 cursor-pointer" >
+                            <td class="whitespace-nowrap px-6 py-4" >
+                                    {{ person.firstname }}
+                            </td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                    {{ person.lastname }}
+                            </td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                    {{ person.civility.name }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -49,6 +42,7 @@
 
 import usePersons from "../services/personservices.js";
 import { RouterLink } from 'vue-router';
+import router from "../router";
 
 const { persons, getPersons } = usePersons();
 await getPersons();
@@ -72,5 +66,9 @@ const personCount = Object.keys(persons.value).length;
 //     }
 // await getPersons();
 
+
+const redirectToPerson = (person) => {
+    router.push({ name: 'person.detail', params: { id: person.id }});
+}
 
 </script>
