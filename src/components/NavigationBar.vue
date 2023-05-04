@@ -17,6 +17,11 @@
                         <p class="text-xl">Companies</p>
                     </div>
                 </RouterLink>
+                <RouterLink :to="{ name: 'search'}">
+                    <div class="flex items-center gap-3">
+                        <p class="text-xl"><i class="fa-solid fa-magnifying-glass"></i></p>
+                    </div>
+                </RouterLink>
             </nav>
         </div>
     </header>

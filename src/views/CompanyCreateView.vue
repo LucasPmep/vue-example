@@ -6,7 +6,7 @@
           <Suspense>
             <CompanyCreate />
             <template #fallback>
-              <p>Loading...</p>
+              <Loader />
             </template>
           </Suspense>
       </div>
@@ -16,6 +16,6 @@
 
 <script setup>
 import CompanyCreate from '../components/CompanyCreate.vue';
-
+import Loader from "../components/Loader.vue";
 
 </script>

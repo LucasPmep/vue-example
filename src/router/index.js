@@ -6,6 +6,7 @@ import CompanyDetailView from "../views/CompanyDetailView.vue"
 import PersonListView from "../views/PersonListView.vue"
 import PersonCreateView from "../views/PersonCreateView.vue"
 import CompanyCreateView from "../views/CompanyCreateView.vue"
+import SearchView from "../views/SearchView.vue"
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,6 +47,11 @@ const router = createRouter({
         path: '/company/create',
         name: 'company.create',
         component: CompanyCreateView,
+        },
+        {
+        path: '/search',
+        name: 'search',
+        component: SearchView,
         },
     ]
 });

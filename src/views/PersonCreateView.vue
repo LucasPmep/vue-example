@@ -6,7 +6,7 @@
           <Suspense>
             <PersonCreate />
             <template #fallback>
-              <p>Loading...</p>
+              <Loader />
             </template>
           </Suspense>
       </div>
@@ -16,6 +16,6 @@
 
 <script setup>
 import PersonCreate from '../components/PersonCreate.vue';
-
+import Loader from "../components/Loader.vue";
 
 </script>

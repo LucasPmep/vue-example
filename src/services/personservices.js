@@ -13,8 +13,8 @@ export default function usePersons() {
         person.value = response.data.data;    
     };
     
-    const getPersons = async () => {
-        let response = await axios.get(`http://localhost:8000/api/persons`);
+    const getPersons = async (page = 1) => {
+        let response = await axios.get(`http://localhost:8000/api/persons?page=${page}`);
         persons.value = response.data.data;
     };
 

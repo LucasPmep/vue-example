@@ -10,7 +10,8 @@
             <Dashboard />
           </template>
             <template #fallback>
-              <p>Loading...</p>
+              <!-- <p>Loading...</p> -->
+              <Loader />
             </template>
           </Suspense>
       </div>
@@ -20,7 +21,7 @@
 
 <script setup>
 import Dashboard from '../components/Dashboard.vue';
-
+import Loader from "../components/Loader.vue";
 
 
 </script>

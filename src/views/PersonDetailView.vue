@@ -8,7 +8,7 @@
             <AsyncComponent :id="id"/>
           </template>
             <template #fallback>
-              <p>Loading...</p>
+              <Loader />
             </template>
           </Suspense>
       </div>
@@ -27,7 +27,7 @@ const props = defineProps({
 });
 
 import AsyncComponent from "../components/PersonDetail.vue";
-
+import Loader from "../components/Loader.vue";
 // const AsyncComponent = defineAsyncComponent(() => {
 //   import('../components/PersonDetail.vue')
 // })
