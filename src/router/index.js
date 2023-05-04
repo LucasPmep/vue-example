@@ -7,7 +7,7 @@ import PersonListView from "../views/PersonListView.vue"
 import PersonCreateView from "../views/PersonCreateView.vue"
 import CompanyCreateView from "../views/CompanyCreateView.vue"
 import SearchView from "../views/SearchView.vue"
-
+// test
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
