@@ -1,10 +1,10 @@
 <template>
     <main class="container text-white pt-4">
       <div class="flex flex-col gap-4 ml-auto mr-auto">
-          Here is the detail-company view, which calls to other components to display. 
+          Here is the TEST view, which calls to other components to display. 
           
           <Suspense>
-            <AsyncComponent :id="id"/>
+            <AsyncComponent />
             <template #fallback>
               <Loader />
             </template>
@@ -15,13 +15,6 @@
 
 
 <script setup>
-const props = defineProps({
-    id: {
-        required: true,
-        type: String, 
-    }
-});
-
-import AsyncComponent from "../components/CompanyDetail.vue";
+import AsyncComponent from "../components/Test.vue";
 import Loader from "../components/Loader.vue";
 </script>

@@ -7,7 +7,8 @@ import PersonListView from "../views/PersonListView.vue"
 import PersonCreateView from "../views/PersonCreateView.vue"
 import CompanyCreateView from "../views/CompanyCreateView.vue"
 import SearchView from "../views/SearchView.vue"
-// test
+import Test from "../views/TestView.vue"
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -52,6 +53,11 @@ const router = createRouter({
         path: '/search',
         name: 'search',
         component: SearchView,
+        },
+        {
+        path: '/test',
+        name: 'test',
+        component: Test,
         },
     ]
 });

@@ -5,6 +5,7 @@ import router from "../router/index.js";
 export default function usePersons() {
     const person = ref([]);
     const persons = ref([]);
+    const paginate = ref([]);
     const errors = ref('');
     
 
@@ -13,9 +14,15 @@ export default function usePersons() {
         person.value = response.data.data;    
     };
     
+    // we could use a parameter paginate boolean to know if we are, or not, in a paginate mode
+    // we can just call both /persons and /persons?page=${page} API calls
     const getPersons = async (page = 1) => {
-        let response = await axios.get(`http://localhost:8000/api/persons?page=${page}`);
-        persons.value = response.data.data;
+
+        const response = await axios.get(`http://localhost:8000/api/persons?page=${page}`);
+        paginate.value =  response.data;
+
+        // const allresponses = await axios.get(`http://localhost:8000/api/persons`);
+        persons.value =  response.data.data;
     };
 
     const createPerson = async (data) => {
@@ -53,6 +60,7 @@ export default function usePersons() {
         person,
         persons,
         errors,
+        paginate,
         getPersons,
         getPerson,
         createPerson,

@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from "./router"
 import './assets/tailwind.css';
-
+// Vue.component('pagination', require('laravel-vue-pagination'));
 
 const app = createApp(App)
 
