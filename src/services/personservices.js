@@ -16,7 +16,7 @@ export default function usePersons() {
     
     // we could use a parameter paginate boolean to know if we are, or not, in a paginate mode
     // we can just call both /persons and /persons?page=${page} API calls
-    const getPersons = async (page = 1, dep = ['aaaaa'], civi = "") => {
+    const getPersons = async (page = 1, dep = [], civi = "") => {
         console.log('start call API');
         // console.log(dep);
         const response = await axios.get(`http://localhost:8000/api/persons?page=${page}&dep=${dep}&civi=${civi}`);
@@ -24,6 +24,10 @@ export default function usePersons() {
 
         // const allresponses = await axios.get(`http://localhost:8000/api/persons`);
         persons.value =  response.data.data;
+        console.log(persons.value);
+        console.log('persons');
+        console.log(paginate.value);
+        console.log('paginate');
     };
 
     const createPerson = async (data) => {

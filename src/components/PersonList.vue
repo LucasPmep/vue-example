@@ -1,32 +1,35 @@
 <template>
   <h1>This is the person-list component.</h1>
   <div class="flex flex-col">
-      <div class="flex">
+      <div class="flex p-4 bg-gray-600">
           <router-link :to="{ name: 'person.create' }" class="bg-green-500 px-2 py-1 text-white rounded">Create person</router-link>
       </div>
-      <div class="block">
+      <div class="block bg-gray-600">
         <!-- <input type="checkbox" name="testCheckbox" @change="checkFilters($event)" id="testCheckbox" checked>
         <label for="testCheckbox">Test</label>
         <input type="checkbox" name="Aube" @change="checkFilters($event)" id="Aube" checked>
         <label for="Aube">Aube</label> -->
-        <div class="columns-4 pb-4">
+        <hr class="p-4">
+        <div class="columns-4 p-4">
             <div class="flex" v-for="departement in departements">
                 <input type="checkbox" :name="departement.name" @change="checkFilters($event)" :id="departement.id" class="mr-1">
                 <label :for="departement.id">{{ departement.name }}</label>
             </div>
         </div>
-        <div class="columns-4 pb-4">
+        <hr class="p-4">
+        <div class="columns-3 p-4 text-xl">
             <div class="flex" v-for="civility in civilities">
                 <input type="checkbox" :name="civility.name" @change="checkCiviFilters($event)" :id="civility.id" class="mr-1">
                 <label :for="civility.id">{{ civility.name }}</label>
             </div>
         </div>
+        <!-- <hr class="p-4"> -->
       </div>
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8 pb-12">
           <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div class="overflow-hidden">
-              <!-- <h1 class="text-2xl text-center text-gray-900 ">There is currently {{ personCount }} persons.</h1> -->
-              <table class="min-w-full text-left text-sm font-light"  v-if="persons[0]">
+              <h1 class="text-2xl text-center text-gray-900 ">Showing {{ personCount }}/{{ totalPersonCount }} persons.</h1>
+              <table class="min-w-full text-left text-sm font-light">
                   <thead class="border-b font-medium dark:border-neutral-500">
                       <th scope="col" class="px-6 py-4">Firstname</th>
                       <th scope="col" class="px-6 py-4">Lastname</th>
@@ -45,12 +48,13 @@
                           </td>
                       </tr>
                   </tbody>
-                  <div v-else>
+                  <!-- <div v-else>
                     <div class="text-3xl">No people for the currently selected filters...</div>
-                  </div>
+                  </div> -->
               </table>
-              <div v-else>
-                  <p>There is currently no people in here ! (maybe turn on the server...)</p>
+              <div v-if="!filteredPersons[0]">
+                    <div class="text-3xl text-center">No people for the currently selected filters...</div>
+                  <!-- <p>There is currently no people in here ! (maybe turn on the server...)</p> -->
               </div>
             <div class="text-center pt-4">
                 <Pagination :data="paginate" @pagination-change-page="getPersons" />
@@ -78,15 +82,14 @@ const checkedFilterValues = ref([]);
 const checkedCiviFilterValues = ref([]);
 
 const { persons, paginate, getPersons } = usePersons();
-await getPersons();
+await getPersons(1, checkedFilterValues.value, checkedCiviFilterValues.value);
 // console.log(paginate.value.meta.total);
-// const personCount = Object.keys(persons.value).length;
-// const personCount = paginate.value.meta.total;
+const personCount = Object.keys(persons.value).length;
+const totalPersonCount = paginate.value.total;
 const { departements, getDepartements } = useDepartements();
 await getDepartements();
 const { civilities, getCivilities } = useCivilities();
 await getCivilities();
-
 
 
 const redirectToPerson = (person) => {
@@ -101,6 +104,11 @@ const checkFilters = (event) => {
     else {
         checkedFilterValues.value.splice(checkedFilterValues.value.indexOf(event.target.id), 1)
     }
+    console.log('departements : ');
+    console.log(checkedFilterValues.value);
+    console.log('civilities : ');
+    console.log(checkedCiviFilterValues.value);
+    console.log('_____________________');
     getPersons(1, checkedFilterValues.value, checkedCiviFilterValues.value);
 }
 
@@ -109,7 +117,8 @@ const checkCiviFilters = (event) => {
         checkedCiviFilterValues.value.push(event.target.id)
     }
     else {
-        checkedCiviFilterValues.value.splice(checkedFilterValues.value.indexOf(event.target.id), 1)
+        checkedCiviFilterValues.value.splice(checkedCiviFilterValues.value.indexOf(event.target.id), 1)
+        // indexOf renverra -1 s'il ne trouve pas la valeur sélectionnée (-1 avec splice éliminera le dernier élément du tableau)
     }
     getPersons(1, checkedFilterValues.value, checkedCiviFilterValues.value);
 }

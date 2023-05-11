@@ -8,12 +8,14 @@
 import usePersons from "../services/personservices.js";
 import useCompanies from "../services/companyservices.js";
 
-const { persons, getPersons } = usePersons();
+const { persons, paginate, getPersons } = usePersons();
 const { companies, getCompanies } = useCompanies();
 
 await getPersons();
 await getCompanies();
 
-const personCount = Object.keys(persons.value).length;
+// const personCount = Object.keys(persons.value).length;
 const companyCount = Object.keys(companies.value).length;
+const personCount = paginate.value.total;
+
 </script>

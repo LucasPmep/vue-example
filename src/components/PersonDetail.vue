@@ -1,5 +1,11 @@
 <template>
     <h1>This is the person-detail component.</h1>
+    <Suspense>
+        <DeleteModale v-bind:revele="revele" v-bind:toggleModale="toggleModale" :removePerson="removePerson" :id="props.id"/>
+        <template #fallback>
+            Loading...
+        </template>
+    </Suspense>
     <form class="space-y-6 pb-4" @submit.prevent="savePerson">
         <div>
             <label for="firstname" class="block">Firstname*</label>
@@ -67,7 +73,7 @@
         </div>
 
         <button type="submit" class="bg-blue-500 px-2 py61 text-white roundedp m-4 shadow">Modify</button>
-        <button type="button" class="bg-red-500 px-2 py61 text-white rounded m-4 shadow" @click="removePerson">Delete</button>
+        <button type="button" class="bg-red-500 px-2 py61 text-white rounded m-4 shadow" @click.prevent="toggleModale">Delete</button>
     </form>
 </template>
 
@@ -77,8 +83,10 @@
 import usePersons from "../services/personservices.js";
 import useCompanies from "../services/companyservices.js";
 import useDepartements from "../services/departementservices.js";
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import useCivilities from "../services/civilityservices.js";
+import DeleteModale from "./modale/PersonDeleteModale.vue";
+
 
 const props = defineProps({
     id: {
@@ -92,6 +100,7 @@ const { departements, getDepartements } = useDepartements();
 const { getPerson, updatePerson, errors, person, deletePerson } = usePersons();
 const { getCivilities, civilities } = useCivilities();
 let reformatedIds = reactive([]);
+const revele = ref(false);
 
 
 await getPerson(props.id);
@@ -118,6 +127,8 @@ const removePerson = async () => {
     await deletePerson(props.id);
 }
 
-
+const toggleModale = () => {
+    revele.value = !revele.value
+}
 
 </script>
