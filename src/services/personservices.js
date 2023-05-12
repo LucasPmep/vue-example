@@ -1,6 +1,8 @@
 import { ref } from "vue";
 import axios from "axios";
 import router from "../router/index.js";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default function usePersons() {
     const person = ref([]);
@@ -46,6 +48,7 @@ export default function usePersons() {
             console.log(person.value);
             await axios.put(`http://localhost:8000/api/persons/` + id, person.value);
             await router.push({name: 'person.list'});
+            toast.success('person updated successfully');
         } catch(error) {
             errors.value = error.response.data.errors;
         }

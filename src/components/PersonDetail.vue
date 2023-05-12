@@ -71,9 +71,10 @@
                 <ul><li v-for="error in errors.departements" class="text-red-600 font-bold text-l">{{ error }} </li></ul>
             </div>
         </div>
-
-        <button type="submit" class="bg-blue-500 px-2 py61 text-white roundedp m-4 shadow">Modify</button>
-        <button type="button" class="bg-red-500 px-2 py61 text-white rounded m-4 shadow" @click.prevent="toggleModale">Delete</button>
+        <div class="flex text-center space-x-60 w-full">
+            <button type="submit" class="bg-blue-500 text-black text-2xl p-2 m-4 shadow border-2 border-black rounded transition-all duration-[250ms] hover:bg-white w-48 center">Modify</button>
+            <button type="button" class="bg-red-500 text-black text-2xl p-2 m-4 shadow border-2 border-black rounded transition-all duration-[250ms] hover:bg-white w-48 center" @click="toggleModale">Delete</button>
+        </div>
     </form>
 </template>
 

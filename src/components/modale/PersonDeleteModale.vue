@@ -4,7 +4,7 @@
             
         </div>
         <div class="modale card border-black border bg-white rounded">
-            <div class="btn-modale text-red-600 cursor-pointer" @click="toggleModale">X</div>
+            <div class="btn-modale text-black cursor-pointer hover:text-red-600 hover:scale-125 transition-all duration-[250ms]" @click="toggleModale"><i class="fa-solid fa-x"></i></div>
             <h2 class="text-black text-center font-bold text-2xl">Are you sure to delete this person ?</h2>
             <div class="p-4">
                 <p class="text-xl text-center font-semibold">{{person.firstname}} {{ person.lastname }} ({{ person.civility.name }})</p>
@@ -20,8 +20,11 @@
 
             </div>
             <div class="flex mt-8 space-x-10">
-                <div class="bg-gray-300 border-gray-800 border cursor-pointer text-center p-1 rounded-full w-full" @click="toggleModale">Cancel</div>
-                <div class="bg-red-500 border-2 border-red-800 cursor-pointer text-center p-1 rounded-full w-full font-bold" @click="removePerson">Yes, delete</div>
+                <div class="bg-gray-300 border-gray-800 border cursor-pointer text-center p-1 rounded-full w-full transition-all duration-[250ms] hover:bg-white hover:scale-105" @click="toggleModale">Cancel</div>
+                <div class="bg-red-500 border-2 border-black cursor-pointer text-center p-1 rounded-full w-full font-bold transition-all duration-[250ms] hover:bg-white hover:scale-105" 
+                @click="removePerson">
+                    Yes, delete
+                </div>
             </div>
         </div>
     </div>

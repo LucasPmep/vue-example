@@ -2,7 +2,7 @@
   <h1>This is the person-list component.</h1>
   <div class="flex flex-col">
       <div class="flex p-4 bg-gray-600">
-          <router-link :to="{ name: 'person.create' }" class="bg-green-500 px-2 py-1 text-white rounded">Create person</router-link>
+          <router-link :to="{ name: 'person.create' }" class="bg-green-500 px-2 py-1 text-white rounded mr-auto ml-auto transition-all duration-[400ms] hover:bg-white hover:text-green-500">Create person</router-link>
       </div>
       <div class="block bg-gray-600">
         <!-- <input type="checkbox" name="testCheckbox" @change="checkFilters($event)" id="testCheckbox" checked>

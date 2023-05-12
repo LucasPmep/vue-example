@@ -1,9 +1,10 @@
 <template>
     <h1>This is the Company-list component.</h1>
     <div class="flex flex-col">
-        <div class="flex">
-            <router-link :to="{ name: 'company.create' }" class="bg-green-500 px-2 py-1 text-white rounded">Create company</router-link>
+        <div class="flex pb-4">
+            <router-link :to="{ name: 'company.create' }" class="bg-green-500 px-2 py-1 text-white rounded mr-auto ml-auto transition-all duration-[400ms] hover:bg-white hover:text-green-500">Create company</router-link>
         </div>
+        <hr class="p-2">
         <div class="block">
             <div class="columns-2 pb-4">
             <div class="flex" v-for="activitysector in activitysectors">

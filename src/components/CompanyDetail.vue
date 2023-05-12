@@ -54,8 +54,10 @@
             </div>
         </div>
 
-        <button type="submit" class="bg-blue-500 px-2 py61 text-white roundedp m-4 shadow">Modify</button>
-        <button type="button" class="bg-red-500 px-2 py61 text-white rounded m-4 shadow" @click="removeCompany">Delete</button>
+        <div class="text-center space-x-52">
+            <button type="submit" class="bg-blue-500 px-2 py61 text-black text-2xl p-1 m-4 shadow border-2 border-black rounded transition-all duration-[250ms] hover:bg-white">Modify</button>
+            <button type="button" class="bg-red-500 px-2 py61 text-black p-1 text-2xl rounded m-4 shadow border-2 border-black transition-all duration-[250ms] hover:bg-white" @click="removeCompany">Delete</button>
+        </div>
     </form>
 </template>
 

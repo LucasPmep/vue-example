@@ -3,14 +3,14 @@
     <form class="space-y-6" @submit.prevent="storePerson">
         <div>
             <label for="firstname" class="block">Firstname</label>
-            <input type="text" id="name" v-model="form.firstname" class="text-black">
+            <input type="text" id="name" v-model="form.firstname" class="text-black rounded">
             <div v-if="errors.firstname">
                 <ul><li v-for="error in errors.firstname" class="text-red-600 font-bold text-l">{{ error }} </li></ul>
             </div>
         </div>
         <div>
             <label for="lastname" class="block">Lastname</label>
-            <input type="text" id="lastname" v-model="form.lastname" class="text-black">
+            <input type="text" id="lastname" v-model="form.lastname" class="text-black rounded">
             <div v-if="errors.lastname">
                 <ul><li v-for="error in errors.lastname" class="text-red-600 font-bold text-l">{{ error }} </li></ul>
             </div>
@@ -25,7 +25,9 @@
                 <ul><li v-for="error in errors.civility_id" class="text-red-600 font-bold text-l">{{ error }} </li></ul>
             </div>
         </div>
-        <button type="submit" class="bg-blue-500 px-2 py61 text-white rounded">Create</button>
+        <div class="text-center pt-4">
+            <button type="submit" class="bg-blue-500 border border-black px-2 py61 text-white rounded text-2xl transition-all duration-[400ms] hover:bg-white hover:text-blue-500 p-1">Create</button>
+        </div>
     </form>
 </template>
 
