@@ -1,5 +1,6 @@
 <template>
     <h1>This is the company-detail component.</h1>
+    <PDF :id="props.id"/>
     <form class="space-y-6 pb-4" @submit.prevent="saveCompany">
         <div>
             <label for="name" class="block">Name*</label>
@@ -47,7 +48,7 @@
             <label for="persons" class="block">People</label>
             <select v-model="reformatedIds" id="people" multiple size="10" @change="modifyLocalPeopleIds"
             class="bg-gray-50 border border-gray-300 shadow text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option v-for="person in persons" :value="person.id">{{ person.lastname }} {{ person.firstname }}</option>
+                <option v-for="person in fullPersons" :value="person.id">{{ person.lastname }} {{ person.firstname }}</option>
             </select>
             <div v-if="errors.people">
                 <ul><li v-for="error in errors.people" class="text-red-600 font-bold text-l">{{ error }} </li></ul>
@@ -68,6 +69,7 @@ import useCompanies from "../services/companyservices.js";
 import usePersons from "../services/personservices.js";
 import useActivitysectors from "../services/activitysectorservices.js";
 import { reactive } from "vue";
+import PDF from "./pdf/pdfCompany.vue";
 
 const props = defineProps({
     id: {
@@ -77,7 +79,7 @@ const props = defineProps({
 });
 
 const { company, getCompany, updateCompany, deleteCompany, errors } = useCompanies();
-const { getPersons, persons } = usePersons();
+const { fullGetPersons, fullPersons } = usePersons();
 const { activitysectors, getActivitysectors } = useActivitysectors();
 let reformatedIds = reactive([]);
 let reformatedSectorsIds = reactive([]);
@@ -85,7 +87,7 @@ let reformatedSectorsIds = reactive([]);
 await getCompany(props.id);
 reformatedIds = company.value.people.map(({ id }) => id);
 reformatedSectorsIds = company.value.activitysectors.map(({ id }) => id);
-await getPersons();
+await fullGetPersons();
 await getActivitysectors();
 
 

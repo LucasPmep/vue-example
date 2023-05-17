@@ -22,6 +22,11 @@
                         <p class="text-xl"><i class="fa-solid fa-magnifying-glass"></i></p>
                     </div>
                 </RouterLink>
+                <RouterLink :to="{ name: 'test'}">
+                    <div class="flex items-right gap-3">
+                        <p class="text-xl"><i class="fa-solid fa-vial"></i></p>
+                    </div>
+                </RouterLink>
             </nav>
         </div>
     </header>

@@ -6,6 +6,8 @@ import router from "./router"
 import './assets/tailwind.css';
 import VueToastify from "vue-toastify";
 import Vue3Toastify from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 // Vue.component('pagination', require('laravel-vue-pagination'));
 
 const app = createApp(App)

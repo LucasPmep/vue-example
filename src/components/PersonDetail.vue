@@ -1,11 +1,12 @@
 <template>
     <h1>This is the person-detail component.</h1>
     <Suspense>
-        <DeleteModale v-bind:revele="revele" v-bind:toggleModale="toggleModale" :removePerson="removePerson" :id="props.id"/>
+        <DeleteModale v-bind:revele="revele" v-bind:toggleModale="toggleModale" :id="props.id" :type="'person'"/>
         <template #fallback>
-            Loading...
+            <Loader />
         </template>
     </Suspense>
+    <PDF :id="props.id"/>
     <form class="space-y-6 pb-4" @submit.prevent="savePerson">
         <div>
             <label for="firstname" class="block">Firstname*</label>
@@ -53,7 +54,7 @@
             <label for="company" class="block">Company</label>
             <select id="company" v-model="person.company_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value=""> </option>
-                <option :value="company.id" v-for="company in companies">{{ company.name }}</option>
+                <option :value="company.id" v-for="company in fullCompanies">{{ company.name }}</option>
             </select>
             <div v-if="errors.company">
                 <ul><li v-for="error in errors.company" class="text-red-600 font-bold text-l">{{ error }} </li></ul>
@@ -84,10 +85,11 @@
 import usePersons from "../services/personservices.js";
 import useCompanies from "../services/companyservices.js";
 import useDepartements from "../services/departementservices.js";
-import { onMounted, reactive, ref } from "vue";
+import { reactive, ref } from "vue";
 import useCivilities from "../services/civilityservices.js";
-import DeleteModale from "./modale/PersonDeleteModale.vue";
-
+import DeleteModale from "./modale/DeleteModale.vue";
+import Loader from "./Loader.vue";
+import PDF from "./pdf/pdfPerson.vue";
 
 const props = defineProps({
     id: {
@@ -96,9 +98,9 @@ const props = defineProps({
     }
 });
 
-const { companies, getCompanies } = useCompanies();
+const { fullGetCompanies, fullCompanies } = useCompanies();
 const { departements, getDepartements } = useDepartements();
-const { getPerson, updatePerson, errors, person, deletePerson } = usePersons();
+const { getPerson, updatePerson, errors, person } = usePersons();
 const { getCivilities, civilities } = useCivilities();
 let reformatedIds = reactive([]);
 const revele = ref(false);
@@ -108,7 +110,7 @@ await getPerson(props.id);
 reformatedIds = person.value.departements.map(({ id }) => id);
 console.log(person)
 await getCivilities();
-await getCompanies();
+await fullGetCompanies();
 await getDepartements();
 
 
@@ -124,9 +126,7 @@ await modifyLocalDepIds();
 const savePerson = async () => {
     await updatePerson(props.id);
 };
-const removePerson = async () => {
-    await deletePerson(props.id);
-}
+
 
 const toggleModale = () => {
     revele.value = !revele.value

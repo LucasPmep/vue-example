@@ -1,13 +1,50 @@
 <template>
   <button @click="createPDF" 
-  class="border transition duration-300 ease-in-out text-center mr-auto ml-auto border-black w-40 h-14 bg-yellow-300 text-black cursor-pointer hover:bg-white">
+  class="
+  border-2 
+  rounded t
+  ransition 
+  text-2xl 
+  duration-300 
+  ease-in-out 
+  text-center 
+  mr-auto 
+  ml-auto 
+  border-black 
+  w-40 
+  h-14 
+  bg-yellow-500 
+  text-black 
+  cursor-pointer 
+  hover:bg-white 
+  m-4">
     Create PDF
   </button>
 </template>
   
 <script setup>
+const props = defineProps({
+    id: {}
+});
 
+import usePersons from "../../services/personservices.js";
 import { generate } from "@pdfme/generator";
+const { getPerson, person } = usePersons();
+await getPerson(props.id);
+let company = 'None';
+if (person.value.company) {
+  company = person.value.company.name;
+}
+let concatDep = "";
+if (person.value.departements[0]) {
+  person.value.departements.forEach(departement => {
+    concatDep = concatDep + departement.name + ', '
+  });
+}
+if (concatDep == "") {
+  concatDep = 'none'
+}
+const departements = concatDep;
 
 const createPDF = async () => {
   const template = {
@@ -99,13 +136,13 @@ const createPDF = async () => {
 };
   const inputs = [
   {
-    "phone": "06 59 48 27 36",
-    "civility": "Homme",
-    "departements": "Gironde",
-    "email": "lucasgillet852@gmail.com",
-    "company": "PME PARTNER",
-    "firstname": "Lucas",
-    "lastname": "GILLET"
+    "phone": person.value.phone,
+    "civility": person.value.civility.name,
+    "departements": departements,
+    "email": person.value.email,
+    "company": company,
+    "firstname": person.value.firstname,
+    "lastname": person.value.lastname
   }
 ];
 
